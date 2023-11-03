@@ -45,11 +45,9 @@ grants: &grants
 
 # Defines model and experiments
 resources:
-  registered_models:
+  models:
       model:
         name: ${var.model_name}
-        catalog_name: ${bundle.target}
-        schema_name: models_uc     
         <<: *grants
         depends_on:
           - resources.jobs.model_training_job.id
