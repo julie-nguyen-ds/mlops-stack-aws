@@ -74,7 +74,7 @@ dbutils.widgets.text("targets", "fare_amount", "Targets")
 dbutils.widgets.text("custom_metrics_loader_function", "custom_metrics", "Custom Metrics Loader Function")
 dbutils.widgets.text("validation_thresholds_loader_function", "validation_thresholds", "Validation Thresholds Loader Function")
 dbutils.widgets.text("evaluator_config_loader_function", "evaluator_config", "Evaluator Config Loader Function")
-dbutils.widgets.text("model_name", "dev.models_uc.usecase-model", "Full (Three-Level) Model Name")
+dbutils.widgets.text("model_name", "usecase-model", "Full (Three-Level) Model Name")
 dbutils.widgets.text("model_version", "", "Candidate Model Version")
 
 # COMMAND ----------
@@ -108,7 +108,7 @@ import traceback
 
 from mlflow.tracking.client import MlflowClient
 
-client = MlflowClient(registry_uri="databricks-uc")
+client = MlflowClient() #registry_uri="databricks-uc")
 
 # set experiment
 experiment_name = dbutils.widgets.get("experiment_name")
