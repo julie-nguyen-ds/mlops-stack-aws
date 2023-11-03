@@ -26,13 +26,13 @@ targets:
 
   staging:
     workspace:
-      host: https://e2-demo-field-eng.cloud.databricks.com
+      host: https://eastus2.azuredatabricks.net/?o=5206439413157315
 
   prod:
     workspace:
-      host: https://e2-demo-field-eng.cloud.databricks.com
+      host: https://eastus2.azuredatabricks.net/?o=5206439413157315
 
   test:
     workspace:
-      host: https://e2-demo-field-eng.cloud.databricks.com
+      host: https://eastus2.azuredatabricks.net/?o=5206439413157315
 
