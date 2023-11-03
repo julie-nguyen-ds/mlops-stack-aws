@@ -2,25 +2,25 @@
 targets:
   dev:
     resources:
-      registered_models:
+      models:
         model:
           comment: Registered model in Unity Catalog for the "usecase" ML Project for ${bundle.target} deployment target.
 
   test:
     resources:
-      registered_models:
+      models:
         model:
           comment: Registered model in Unity Catalog for the "usecase" ML Project for ${bundle.target} deployment target.
 
   staging:
     resources:
-      registered_models:
+      models:
         model:
           comment: Registered model in Unity Catalog for the "usecase" ML Project for ${bundle.target} deployment target.
 
   prod:
     resources:
-      registered_models:
+      models:
         model:
           comment: |
             Registered model in Unity Catalog for the "usecase" ML Project. See the corresponding [Git repo]($#{var.git_repo_url}) for details on the project.

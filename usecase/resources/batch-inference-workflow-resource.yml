@@ -23,7 +23,7 @@ resources:
             base_parameters:
               env: ${bundle.target}
               input_table_name: taxi_scoring_sample  # TODO: create input table for inference
-              output_table_name: ${bundle.target}.models_uc.predictions
+              output_table_name: ${bundle.target}_mlops_stacks_no_uc_predictions
               model_name: ${var.model_name}
               # git source information of current ML resource deployment. It will be persisted as part of the workflow run
               git_source_info: url:${bundle.git.origin_url}; branch:${bundle.git.branch}; commit:${bundle.git.commit}
