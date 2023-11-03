@@ -58,7 +58,7 @@ dbutils.widgets.text(
 )
 # Unity Catalog registered model name to use for the trained model.
 dbutils.widgets.text(
-    "model_name", "dev.models_uc.usecase-model", label="Full (Three-Level) Model Name"
+    "model_name", "usecase-model", label="Full (Three-Level) Model Name"
 )
 
 # COMMAND ----------
@@ -74,7 +74,7 @@ model_name = dbutils.widgets.get("model_name")
 import mlflow
 
 mlflow.set_experiment(experiment_name)
-mlflow.set_registry_uri('databricks-uc')
+#mlflow.set_registry_uri('databricks-uc')
 
 # COMMAND ----------
 # DBTITLE 1, Load raw data
