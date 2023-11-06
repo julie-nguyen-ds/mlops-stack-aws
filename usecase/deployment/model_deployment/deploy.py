@@ -2,12 +2,13 @@ import sys
 import pathlib
 
 sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.resolve()))
-
+from utils import get_deployed_model_stage_for_env
 from mlflow.tracking import MlflowClient
 
 
 def deploy(model_uri, env):
-    """Deploys an already-registered model in Unity catalog by assigning it the appropriate alias for model deployment.
+    """
+    Deploys an already-registered model produced by moving it into the appropriate stage for model deployment.
 
     :param model_uri: URI of the model to deploy. Must be in the format "models:/<name>/<version-id>", as described in
                       https://www.mlflow.org/docs/latest/model-registry.html#fetching-an-mlflow-model-from-the-model-registry
@@ -15,25 +16,18 @@ def deploy(model_uri, env):
                 Defaults to "dev"
     :return:
     """
-    print(f"Deployment running in env: {env}")
     _, model_name, version = model_uri.split("/")
-    client = MlflowClient() #registry_uri="databricks-uc")
+    client = MlflowClient()
     mv = client.get_model_version(model_name, version)
-    target_alias = "Champion"
-    if target_alias not in mv.aliases:
-        client.set_registered_model_alias(
+    target_stage = get_deployed_model_stage_for_env(env)
+    if mv.current_stage != target_stage:
+        client.transition_model_version_stage(
             name=model_name,
-            alias=target_alias, 
-            version=version)
-        print(f"Assigned alias '{target_alias}' to model version {model_uri}.")
-        
-        # remove "Challenger" alias if assigning "Champion" alias
-        if target_alias == "Champion" and "Challenger" in mv.aliases:
-            print(f"Removing 'Challenger' alias from model version {model_uri}.")
-            client.delete_registered_model_alias(
-                name=model_name,
-                alias="Challenger")
-
+            version=version,
+            stage=target_stage,
+            archive_existing_versions=True,
+        )
+    print(f"Successfully deployed model with URI {model_uri} to {env}")
 
 
 if __name__ == "__main__":
