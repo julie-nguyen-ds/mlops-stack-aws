@@ -17,7 +17,8 @@ resources:
       name: ${bundle.target}-usecase-model-training-job
       job_clusters:
         - job_cluster_key: model_training_job_cluster
-          <<: *new_cluster
+          existing_cluster_id: 1234-567890-abcde123
+          #<<: *new_cluster
       tasks:
         - task_key: Pretrain
           run_job_task:
@@ -25,6 +26,9 @@ resources:
 
         - task_key: Train
           job_cluster_key: model_training_job_cluster
+          depends_on:
+            - task_key: Pretrain
+
           notebook_task:
             notebook_path: ../training/notebooks/Train.py
             base_parameters:
