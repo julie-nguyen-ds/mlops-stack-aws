@@ -20,7 +20,6 @@ resources:
 #          <<: *new_cluster
       tasks:
         - task_key: Pretrain
-          existing_cluster_id: 1107-054507-g6zfsi5s
           run_job_task:
             job_id: 457623590600261
 
